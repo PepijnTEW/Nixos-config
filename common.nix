@@ -47,20 +47,20 @@
   users.users."pepi" = {
     isNormalUser = true;
     description = "Pepi";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [];
   };
 
  users.users."xiaoya" = {
    isNormalUser = true;
    description = "XiaoYa";
-   extraGroups = [ "networkmanager" ];
+   extraGroups = [ "networkmanager" "video" ];
    packages = with pkgs; [];
  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  hardware.logitech.wireless.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   # environment.systemPackages = with pkgs; [
@@ -84,12 +84,16 @@
   environment.systemPackages = with pkgs; [
   	htop
     git
+    brightnessctl
+    alsa-utils
   ];
 
   programs.sway = {
   	enable = true;
   	wrapperFeatures.gtk = true;
   };
+
+  hardware.acpilight.enable = true;
 
   security.polkit.enable = true;
 
