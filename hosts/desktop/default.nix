@@ -23,6 +23,7 @@
       options hid_apple fnmode=2
     '';
 
+services.ratbagd.enable = true;
 
     security.rtkit.enable = true;
     services.pipewire = {
@@ -54,5 +55,6 @@
   environment.systemPackages = with pkgs; [
     gamescope
     mangohud
+    piper
   ];
 }

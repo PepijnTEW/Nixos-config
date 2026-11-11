@@ -47,7 +47,7 @@
   users.users."pepi" = {
     isNormalUser = true;
     description = "Pepi";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
     packages = with pkgs; [];
   };
 
@@ -61,6 +61,13 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   hardware.logitech.wireless.enable = true;
+  virtualisation.docker.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   # environment.systemPackages = with pkgs; [
@@ -86,14 +93,10 @@
     git
     brightnessctl
     alsa-utils
+    docker-compose
   ];
 
-  programs.sway = {
-  	enable = true;
-  	wrapperFeatures.gtk = true;
-  };
-
-  hardware.acpilight.enable = true;
+  programs.hyprland.enable = true;
 
   security.polkit.enable = true;
 
@@ -104,6 +107,15 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # font settings for modern displays
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+    hinting.enable = true;
+    hinting.style = "slight";
+    subpixel.rgba = "rgb";
+  };
+
   services.upower.enable = true;
 
   # Open ports in the firewall.
@@ -111,6 +123,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
